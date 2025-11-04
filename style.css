@@ -1,0 +1,309 @@
+/* Importing Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+:root {
+  /* Color */
+  --white-color: #ffffff;
+  --dark-color: #00072d;
+  --primary-color: #001c55;
+  --secondary-color: #0a2472;
+  --third-color: #0e6ba8;
+  --Light-Sky-Blue: #a6e1fa;
+
+  /* Font Size */
+  --font-size-s: 0.9rem;
+  --font-size-n: 1rem;
+  --font-size-m: 1.12rem;
+  --font-size-l: 1.5rem;
+  --font-size-xl: 2rem;
+  --font-size-xxl: 2.3rem;
+
+  /* Font Weight */
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Border Radius */
+  --border-radius-s: 8px;
+  --border-radius-m: 30px;
+  --border-radius-circle: 50%;
+
+  /* Site max width */
+  --site-max-width: 1300px;
+}
+
+/* Base resets */
+ul { list-style: none; }
+a { text-decoration: none; }
+img { width: 100%; }
+
+.section-content {
+  margin: 0 auto;
+  padding: 10px 20px;
+  max-width: var(--site-max-width);
+}
+
+/* Navbar Styling */
+
+.nav-logo .logo-text, .hero-image-wrapper, #menu-open-button,#menu-close-button{
+  background: linear-gradient(90deg, #0e6ba8, #a6e1fa);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+  animation: animateGradient 10s ease infinite;
+}
+
+@keyframes animateGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+
+
+header {
+  position: fixed;
+  width: 100%;
+  z-index: 900;
+  padding: 8px 0;
+  background: rgba(28, 33, 58, 0.534);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+}
+
+header .navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar .nav-logo .logo-text{
+  color: var(--white-color);
+  font-size: var(--font-size-l);
+}
+
+header .nav-menu {
+  display: flex;
+  gap: 5px;
+}
+
+.navbar .nav-menu .nav-link {
+  padding: 10px 18px;
+  color: var(--Light-Sky-Blue);
+  font-size: var(--font-size-s);
+  font-weight: var(--font-weight-medium);
+}
+
+.navbar .nav-menu .nav-link:hover,
+.navbar .nav-menu .nav-link:active {
+  color: var(--white-color);
+}
+
+.navbar :where(#menu-close-button, #menu-open-button) {
+  display: none;
+}
+
+/* Hero Section */
+.hero-section { min-height: 100vh; background: var(--dark-color); }
+
+.hero-section .section-content {
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
+  color: var(--white-color);
+  justify-content: space-between;
+}
+
+.hero-section .hero-details .title {
+  font-size: var(--font-size-xxl);
+  color: var(--Light-Sky-Blue);
+}
+
+.hero-section .hero-details .subtitle {
+  margin-top: 8px;
+  max-width: 80%;
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+}
+
+.hero-section .hero-details .description {
+  max-width: 80%;
+  margin: 5px 0 40px;
+  font-size: var(--font-size-m);
+}
+
+.hero-section .hero-details .buttons { display: flex; gap: 15px; }
+
+.hero-section .hero-details .button {
+  padding: 5px 15px;
+  border: 2px solid transparent;
+  color: var(--Light-Sky-Blue);
+  border-radius: var(--border-radius-m);
+  background: var(--secondary-color);
+  font-weight: var(--font-weight-medium);
+  transition: 0.3s ease;
+}
+
+.hero-section .hero-details .button:hover, 
+.hero-section .hero-details .download-cv {
+  color: var(--white-color);
+  border-color: var(--Light-Sky-Blue);
+  background: transparent;
+}
+
+.hero-section .hero-details .download-cv:hover {
+  color: var(--Light-Sky-Blue);
+  border-color: var(--secondary-color);
+  background: var(--secondary-color);
+}
+
+.hero-section .hero-image-wrapper {
+  max-width: 500px;
+  margin-right: 30px;
+}
+
+.hero-section .hero-image-wrapper .hero-image {
+  border-radius: var(--border-radius-circle);
+  border: 5px solid transparent;
+  background:
+    linear-gradient(var(--dark-color), var(--dark-color)) padding-box,
+    linear-gradient(135deg, #00072d, #001c55, #0a2472, #0e6ba8, #001c55) border-box;
+  background-size: 400% 400%;
+  animation: borderGradient 5s ease infinite;
+}
+
+/* Animation Keyframes */
+@keyframes borderGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Optional overlay
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.45);
+  z-index: 1100;     
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s ease;
+}
+
+/* When menu is open */
+body.show-mobile-menu .menu-overlay {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Mobile */
+@media screen and (max-width: 900px) {
+  :root{
+    --font-size-m: 1rem;
+    --font-size-l: 1.4rem;
+    --font-size-xl: 1.5rem;
+    --font-size-xxl: 1.8rem;
+  }
+
+  .navbar :where(#menu-close-button, #menu-open-button) {
+    display: block;
+    font-size: var(--font-size-l);
+  }
+
+  .navbar #menu-open-button {
+    background-color: var(--dark-color);
+    border: none;
+    color: var(--white-color);
+  }
+
+  .navbar #menu-close-button {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    border: none;
+    position: absolute;
+    right: 30px;
+    top: 30px;
+  }
+
+  .navbar .nav-menu {
+    position: fixed;
+    left: -320px;
+    top: 0;
+    width: 300px;
+    max-width: 88vw;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 100px;
+    background-color: #001c55;     /* Solid drawer color */
+    color: #fff;
+    transition: left 0.2s ease;
+    z-index: 1200;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+    box-shadow: 8px 0 24px rgba(0,0,0,.3);
+  }
+
+  body.show-mobile-menu .navbar .nav-menu { left: 0; }
+
+  .navbar .nav-menu .nav-link {
+    color: var(--Light-Sky-Blue);
+    display: block;
+    margin-top: 1px;
+    font-size: var(--font-size-m);
+  }
+
+  .hero-section .section-content {
+    flex-direction: column-reverse;
+    justify-content: center;
+    gap: 10px;
+    text-align: center;
+    padding: 30px 20px 20px;
+  }
+
+  .hero-section .hero-details :is(.subtitle, .description) { max-width: 100%; }
+
+  .hero-section .hero-details .buttons { justify-content: center; }
+
+  .hero-section .hero-image-wrapper {
+    padding-top: 20%;
+    max-width: 80%;
+    margin-right: 0;
+  }
+}
+
+/* Desktop reset to horizontal menu if needed */
+@media (min-width: 901px) {
+  .menu-overlay { display: none; }
+  .navbar .nav-menu {
+    position: static;
+    left: 0;
+    width: auto;
+    height: auto;
+    padding-top: 0;
+    background: transparent;
+    z-index: auto;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+    box-shadow: none;
+    max-width: none;
+  }
+}

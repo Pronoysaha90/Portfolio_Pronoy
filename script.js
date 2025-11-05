@@ -40,3 +40,30 @@ navLinks.forEach(link => {
   });
 });
 
+
+<!-- Problem Solving  -->
+
+  // Simple fade-in animation on load using vanilla JS
+        function achFadeInElements() {
+            const elements = document.querySelectorAll('.ach-fade-in');
+            elements.forEach((el, index) => {
+                setTimeout(() => {
+                    el.classList.add('visible');
+                }, index * 200); // Staggered delay
+            });
+        }
+
+        // Trigger on page load
+        window.addEventListener('load', achFadeInElements);
+
+        // Optional: Intersection Observer for scroll animations
+        if ('IntersectionObserver' in window) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            });
+            document.querySelectorAll('.ach-fade-in').forEach(el => observer.observe(el));
+        }

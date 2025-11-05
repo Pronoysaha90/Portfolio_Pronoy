@@ -40,6 +40,11 @@
   --site-max-width: 1300px;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+
 /* Base resets */
 ul { list-style: none; }
 a { text-decoration: none; }
@@ -386,7 +391,6 @@ body.show-mobile-menu .menu-overlay {
 .skill-icon {
   height: 20px;
   width: 20px;
-  
 }
 
 .skills-grid span {

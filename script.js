@@ -30,3 +30,13 @@ function loadSection(id, file) {
 loadSection("skills", "sections/skills.html");
 
 // Link with skills.html Start End
+
+const navLinks = document.querySelectorAll('.nav-link');
+const navMenu = document.querySelector('.nav-menu');
+
+navLinks.forEach(link => {
+  link.addEventListener("click", () => {
+    navMenu.classList.remove("active");
+  });
+});
+

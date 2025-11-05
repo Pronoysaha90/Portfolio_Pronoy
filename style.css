@@ -322,7 +322,7 @@ body.show-mobile-menu .menu-overlay {
 }
 
 .skills h2 {
-  font-size: var(--font-size-xl);
+  font-size: var(--font-size-xxl);
   margin-bottom: 40px;
   color: var(--Light-Sky-Blue);
 }

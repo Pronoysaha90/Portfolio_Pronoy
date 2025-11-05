@@ -294,6 +294,10 @@ body.show-mobile-menu .menu-overlay {
     gap: 12px;
   }
   
+  .skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr))!important;
+}
 
 }
 
@@ -379,6 +383,12 @@ body.show-mobile-menu .menu-overlay {
   gap: 10px;
 }
 
+.skill-icon {
+  height: 20px;
+  width: 20px;
+  
+}
+
 .skills-grid span {
   background: rgba(255, 255, 255, 0.05);
   color: var(--Light-Sky-Blue);
@@ -388,6 +398,10 @@ body.show-mobile-menu .menu-overlay {
   transition: 0.3s ease;
   border: 1px solid transparent;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
 
 .skills-grid span:hover {

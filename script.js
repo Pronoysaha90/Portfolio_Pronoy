@@ -30,8 +30,6 @@ function loadSection(id, file) {
 loadSection("skills", "sections/skills.html");
 loadSection("experience", "sections/Experience.html");
 
-// Link with skills.html Start End
-
 const navLinks = document.querySelectorAll('.nav-link');
 const navMenu = document.querySelector('.nav-menu');
 

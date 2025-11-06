@@ -305,7 +305,7 @@ body.show-mobile-menu .menu-overlay {
   }
 
   .hero-section .hero-details :is(.subtitle, .description) {
-    max-width: 100%;
+    max-width: var(--site-max-width);
   }
 
   .hero-section .hero-details .buttons {
@@ -328,6 +328,16 @@ body.show-mobile-menu .menu-overlay {
   .skills-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)) !important;
+  }
+
+  .ach-container {
+  width: 100%!important;
+  margin: 0 auto;
+  padding: 1%!important;
+}
+
+  .ach-section {
+    margin-bottom: 0rem!important;
   }
 }
 
@@ -367,7 +377,7 @@ body.show-mobile-menu .menu-overlay {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(100px));
   gap: 15px;
-  max-width: var(--site-max-width);
+  max-width: 1270px;
   margin: 0 auto;
 }
 
@@ -450,10 +460,11 @@ body.show-mobile-menu .menu-overlay {
   justify-content: center;
   background: var(--dark-color);
   padding: 4rem 1rem;
+  margin-bottom: -10rem;
 }
 
 .ach-container {
-  max-width: var(--site-max-width);
+  width: var(--site-max-width);
   width: 100%;
   margin: 0 auto;
 }
@@ -613,4 +624,257 @@ body.show-mobile-menu .menu-overlay {
 .ach-fade-in.visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Experience Section */
+
+.experience {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--dark-color);
+    padding: 4rem 1rem;
+}
+
+.exp-container {
+    width: 100%;
+    max-width: var(--site-max-width);
+    margin: 0 auto;
+}
+
+.exp-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.exp-title, .ach-title {
+    font-size: var(--font-size-xxl);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: 0.5rem;
+    color: var(--Light-Sky-Blue);
+    background: linear-gradient(90deg, #0e6ba8, #a6e1fa);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: animateGradient 10s ease infinite;
+}
+
+.exp-timeline {
+    position: relative;
+    padding-left: 50px;
+}
+
+/* Timeline Line */
+.exp-timeline::before {
+    content: '';
+    position: absolute;
+    left: 24px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, 
+        var(--third-color) 0%, 
+        var(--Light-Sky-Blue) 50%, 
+        var(--third-color) 100%);
+}
+
+.exp-item {
+    position: relative;
+    margin-bottom: 3rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.exp-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Timeline Dot */
+.exp-item::before {
+    content: '';
+    position: absolute;
+    left: -42px;
+    top: 8px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--Light-Sky-Blue);
+    border: 3px solid var(--dark-color);
+    box-shadow: 0 0 12px rgba(166, 225, 250, 0.4);
+    z-index: 2;
+}
+
+.exp-card {
+    background: rgba(28, 33, 58, 0.534);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--border-radius-s);
+    padding: 1.5rem;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.exp-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 2px 12px rgba(166, 225, 250, 0.15);
+    border-color: rgba(166, 225, 250, 0.5);
+}
+
+.exp-header-wrapper {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.exp-company-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.exp-company-icon {
+    width: 50px;
+    height: 50px;
+    background: var(--secondary-color);
+    border-radius: var(--border-radius-s);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.exp-company-details h3 {
+    font-size: var(--font-size-l);
+    color: var(--white-color);
+    margin-bottom: 0.25rem;
+    font-weight: var(--font-weight-semibold);
+}
+
+.exp-job-title {
+    font-size: var(--font-size-m);
+    color: var(--Light-Sky-Blue);
+    font-weight: var(--font-weight-medium);
+}
+
+.exp-duration {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: var(--font-size-s);
+    color: #a1a1aa;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    white-space: nowrap;
+}
+
+.exp-duration-icon {
+    font-size: 1rem;
+}
+
+.exp-duration-badge {
+    background: var(--third-color);
+    color: var(--white-color);
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: var(--font-weight-medium);
+}
+
+.exp-achievements {
+    margin-top: 1rem;
+}
+
+.exp-achievements-title {
+    font-size: var(--font-size-m);
+    color: var(--Light-Sky-Blue);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: var(--font-weight-medium);
+}
+
+.exp-achievements-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.exp-achievement-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+    padding: 0.75rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    border-left: 3px solid var(--third-color);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.exp-achievement-item:hover {
+    transform: translateX(5px);
+    background: rgba(166, 225, 250, 0.1);
+}
+
+.exp-achievement-icon {
+    color: var(--Light-Sky-Blue);
+    font-size: 1rem;
+    margin-top: 0.25rem;
+    flex-shrink: 0;
+}
+
+.exp-achievement-text {
+    font-size: var(--font-size-n);
+    color: var(--white-color);
+    line-height: 1.6;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .experience {
+        padding: 2rem 1rem;
+    }
+
+    .exp-timeline {
+        padding-left: 30px;
+    }
+
+    .exp-timeline::before {
+        left: 16px;
+    }
+
+    .exp-item::before {
+        left: -34px;
+        width: 12px;
+        height: 12px;
+    }
+
+    .exp-header-wrapper {
+        flex-direction: column;
+    }
+
+    .exp-company-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1.25rem;
+    }
+
+    .exp-duration {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .exp-card {
+        padding: 1rem;
+    }
 }

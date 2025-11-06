@@ -28,6 +28,7 @@ function loadSection(id, file) {
 }
 
 loadSection("skills", "sections/skills.html");
+loadSection("experience", "sections/Experience.html");
 
 // Link with skills.html Start End
 
@@ -67,3 +68,30 @@ navLinks.forEach(link => {
             });
             document.querySelectorAll('.ach-fade-in').forEach(el => observer.observe(el));
         }
+// Experience Section
+
+function initExperienceAnimation() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    // Observe all experience items
+    document.querySelectorAll('.exp-item').forEach(item => {
+        observer.observe(item);
+    });
+}
+
+// Initialize when Experience section loads
+window.addEventListener('load', () => {
+    setTimeout(initExperienceAnimation, 100);
+});

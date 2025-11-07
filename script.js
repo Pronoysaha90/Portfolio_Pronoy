@@ -28,7 +28,7 @@ function loadSection(id, file) {
 }
 
 loadSection("skills", "sections/skills.html");
-loadSection("experience", "sections/Experience.html");
+loadSection("experience", "sections/experience.html");
 
 const navLinks = document.querySelectorAll('.nav-link');
 const navMenu = document.querySelector('.nav-menu');

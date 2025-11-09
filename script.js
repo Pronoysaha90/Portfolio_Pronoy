@@ -29,6 +29,7 @@ function loadSection(id, file) {
 
 loadSection("skills", "sections/skills.html");
 loadSection("experience", "sections/experience.html");
+loadSection("education", "sections/education.html");
 
 const navLinks = document.querySelectorAll('.nav-link');
 const navMenu = document.querySelector('.nav-menu');
@@ -93,3 +94,6 @@ function initExperienceAnimation() {
 window.addEventListener('load', () => {
     setTimeout(initExperienceAnimation, 100);
 });
+
+
+

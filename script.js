@@ -1,154 +1,125 @@
-const menuOpenButton = document.querySelector("#menu-open-button");
+// ========== Mobile menu ==========
+const menuOpenButton  = document.querySelector("#menu-open-button");
 const menuCloseButton = document.querySelector("#menu-close-button");
 
-
-menuOpenButton.addEventListener("click", () => {
-  document.body.classList.toggle("show-mobile-menu");
-});
-
-menuCloseButton.addEventListener("click", () => menuOpenButton.click());
-
-
-// Link with skills.html Start
-
-function loadSection(id, file) {
-  fetch(file)
-    .then(response => {
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-      return response.text();
-    })
-    .then(data => {
-      document.getElementById(id).innerHTML = data;
-    })
-    .catch(error => {
-      console.error("Error loading section:", error);
-    });
-}
-
-loadSection("skills", "sections/skills.html");
-loadSection("experience", "sections/experience.html");
-loadSection("education", "sections/education.html");
-loadSection("project", "sections/project.html");
-loadSection("fiverr", "sections/fiverr.html");
-
-const navLinks = document.querySelectorAll('.nav-link');
-const navMenu = document.querySelector('.nav-menu');
-
-navLinks.forEach(link => {
-  link.addEventListener("click", () => {
-    navMenu.classList.remove("active");
+// Toggle drawer
+if (menuOpenButton) {
+  menuOpenButton.addEventListener("click", () => {
+    document.body.classList.toggle("show-mobile-menu");
   });
+}
+// Always close drawer
+if (menuCloseButton) {
+  menuCloseButton.addEventListener("click", () => {
+    document.body.classList.remove("show-mobile-menu");
+  });
+}
+// Close drawer when any nav link is clicked (works for both desktop/mobile)
+document.addEventListener("click", (e) => {
+  const link = e.target.closest(".nav-link");
+  if (link) document.body.classList.remove("show-mobile-menu");
 });
 
+// ========== Section loader with callbacks ==========
+function loadSection(id, file, onLoad) {
+  const host = document.getElementById(id);
+  if (!host) return Promise.resolve();
 
-<!-- Problem Solving  -->
-
-  // Simple fade-in animation on load using vanilla JS
-        function achFadeInElements() {
-            const elements = document.querySelectorAll('.ach-fade-in');
-            elements.forEach((el, index) => {
-                setTimeout(() => {
-                    el.classList.add('visible');
-                }, index * 200); // Staggered delay
-            });
-        }
-
-        // Trigger on page load
-        window.addEventListener('load', achFadeInElements);
-
-        // Optional: Intersection Observer for scroll animations
-        if ('IntersectionObserver' in window) {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            });
-            document.querySelectorAll('.ach-fade-in').forEach(el => observer.observe(el));
-        }
-// Experience Section
-
-function initExperienceAnimation() {
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                observer.unobserve(entry.target);
-            }
-        });
-    }, observerOptions);
-
-    // Observe all experience items
-    document.querySelectorAll('.exp-item').forEach(item => {
-        observer.observe(item);
-    });
+  return fetch(file, { cache: "no-cache" })
+    .then((res) => {
+      if (!res.ok) throw new Error(`HTTP ${res.status} for ${file}`);
+      return res.text();
+    })
+    .then((html) => {
+      host.innerHTML = html;
+      if (typeof onLoad === "function") onLoad(host);
+    })
+    .catch((err) => console.error("Error loading section:", file, err));
 }
 
-// Initialize when Experience section loads
-window.addEventListener('load', () => {
-    setTimeout(initExperienceAnimation, 100);
-});
+// ========== Generic reveal helper ==========
+function revealOnView(nodeList, options = { threshold: 0.15 }, visibleClass = "visible") {
+  const els = Array.from(nodeList || []);
+  if (!els.length) return;
 
-// ===== Education Section reveal (runs after fetch injection) =====
-function initEducationAnimations() {
-  const items = document.querySelectorAll('.edu-fade-in');
-  if (!items.length) return;
-
-  // Use IntersectionObserver if available
-  if ('IntersectionObserver' in window) {
+  if ("IntersectionObserver" in window) {
     const io = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          io.unobserve(entry.target);
+      entries.forEach((en) => {
+        if (en.isIntersecting) {
+          en.target.classList.add(visibleClass);
+          io.unobserve(en.target);
         }
       });
-    }, { threshold: 0.15 });
-
-    items.forEach(el => io.observe(el));
+    }, options);
+    els.forEach((el) => io.observe(el));
   } else {
     // Fallback
     const onScroll = () => {
       const trigger = window.innerHeight * 0.85;
-      items.forEach(el => {
-        if (!el.classList.contains('visible') && el.getBoundingClientRect().top < trigger) {
-          el.classList.add('visible');
+      els.forEach((el) => {
+        if (!el.classList.contains(visibleClass) && el.getBoundingClientRect().top < trigger) {
+          el.classList.add(visibleClass);
         }
       });
     };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('load', onScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
   }
 }
 
-// Watch the #education container for content injection
-(function watchEducationMount(){
-  const host = document.getElementById('education');
-  if (!host) return;
+// ========== Per-section initializers ==========
+function initSkillsSection(root) {
+  // Fade-in items inside skills (achievements blocks reused here)
+  const items = root.querySelectorAll(".ach-fade-in");
+  revealOnView(items);
 
-  const observer = new MutationObserver(() => {
-    if (host.querySelector('.edu-card')) {
-      initEducationAnimations();
-      observer.disconnect();
-    }
+  // Make clickable list items keyboard accessible
+  root.querySelectorAll(".ach-list-item").forEach((li) => {
+    li.setAttribute("tabindex", "0");
+    li.addEventListener("keydown", (ev) => {
+      if (ev.key === "Enter" || ev.key === " ") {
+        ev.preventDefault();
+        li.click();
+      }
+    });
   });
+}
 
-  observer.observe(host, { childList: true, subtree: true });
+function initExperienceAnimation() {
+  const items = document.querySelectorAll(".exp-item");
+  revealOnView(items);
+}
 
-  // In case content was already present
-  if (host.querySelector('.edu-card')) {
-    initEducationAnimations();
-    observer.disconnect();
+function initEducationAnimations(scope) {
+  const root = scope instanceof HTMLElement ? scope : document;
+  const items = root.querySelectorAll(".edu-fade-in");
+  revealOnView(items);
+}
+
+// ========== Boot ==========
+window.addEventListener("load", () => {
+  // Load split HTML sections, then init each
+  loadSection("skills",     "sections/skills.html",     initSkillsSection);
+  loadSection("experience", "sections/experience.html", initExperienceAnimation);
+  loadSection("education",  "sections/education.html",  initEducationAnimations);
+  loadSection("testimonials",     "sections/testimonials.html");
+  // Optional: footer placeholder <div id="footer"></div>
+  loadSection("footer",     "sections/footer.html").catch(() => {});
+
+  // If some elements already exist in DOM (SSR or inline), init them too
+  initExperienceAnimation();
+  initEducationAnimations(document);
+
+  // If opened with a hash, ensure smooth scroll after initial load
+  if (location.hash) {
+    setTimeout(() => {
+      try {
+        const el = document.querySelector(location.hash);
+        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      } catch {}
+    }, 100);
   }
-})();
+});
+
 
 

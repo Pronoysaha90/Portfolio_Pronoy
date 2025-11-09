@@ -63,7 +63,7 @@ img {
 
 /* Navbar Styling */
 
-.nav-logo .logo-text,
+.nav-logo .logo-text,.footer-name,
 .hero-image-wrapper,
 #menu-open-button,
 #menu-close-button {
@@ -958,4 +958,105 @@ body.show-mobile-menu .menu-overlay {
   .edu-title{font-size:var(--font-size-xl);}
   .edu-grid{grid-template-columns:1fr; gap:1rem;}
   .edu-card{padding:1.25rem;}
+}
+
+/* Footer (uses your variables and scale) */
+.site-footer{
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.05) 0%, rgba(255,255,255,0) 60%),
+    var(--dark-color);
+  padding: 18px 0 28px;
+  color: var(--white-color);
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+
+.footer-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 16px;
+}
+
+/* Left block */
+.footer-heading{
+  font-size: var(--font-size-l);
+  font-weight: var(--font-weight-semibold);
+  opacity: .9;
+  margin-bottom: 8px;
+}
+
+.footer-links{
+  display:flex;
+  align-items:center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.f-link{
+  display:inline-flex;
+  align-items:center;
+  gap:3px;
+  color:#cbd5e1;
+  font-size: calc(var(--font-size-n) * .95);
+  transition: color .2s ease, opacity .2s ease;
+  opacity: .95;
+}
+
+.f-link:hover{ color: var(--white-color); opacity: 1; }
+
+/* tiny bullet-like icon to mimic screenshot */
+.f-ico{
+  width:10px; height:10px; border-radius:3px;
+  background: linear-gradient(180deg, var(--Light-Sky-Blue), var(--third-color));
+  box-shadow: 0 0 6px rgba(166,225,250,.45);
+}
+
+/* Right block */
+.footer-right{ text-align:right; }
+.footer-name{
+  font-size: var(--font-size-l);
+  font-weight: var(--font-weight-bold);
+  margin: 0 0 4px 0;
+}
+.footer-role{
+  font-size: calc(var(--font-size-n) * .95);
+  color:#9aa4b2;
+  margin:0;
+}
+
+/* Divider like a thin hairline */
+.footer-divider{
+  height:1px;
+  margin: 14px 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.12), transparent);
+}
+
+/* Bottom credits */
+.footer-bottom{
+  text-align:center;
+}
+
+.footer-made,
+.footer-copy{
+  margin: 4px 0;
+  font-size: calc(var(--font-size-m) * .9);
+  color:#9aa4b2;
+}
+
+.footer-made .heart{ color:#ef5555; }
+
+/* Responsive */
+@media (max-width: 700px) {
+  .footer-heading {
+    text-align: center;
+  }
+
+  .footer-top {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-right {
+    text-align: center;
+  }
 }

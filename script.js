@@ -95,5 +95,58 @@ window.addEventListener('load', () => {
     setTimeout(initExperienceAnimation, 100);
 });
 
+// ===== Education Section reveal (runs after fetch injection) =====
+function initEducationAnimations() {
+  const items = document.querySelectorAll('.edu-fade-in');
+  if (!items.length) return;
+
+  // Use IntersectionObserver if available
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    items.forEach(el => io.observe(el));
+  } else {
+    // Fallback
+    const onScroll = () => {
+      const trigger = window.innerHeight * 0.85;
+      items.forEach(el => {
+        if (!el.classList.contains('visible') && el.getBoundingClientRect().top < trigger) {
+          el.classList.add('visible');
+        }
+      });
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('load', onScroll);
+    onScroll();
+  }
+}
+
+// Watch the #education container for content injection
+(function watchEducationMount(){
+  const host = document.getElementById('education');
+  if (!host) return;
+
+  const observer = new MutationObserver(() => {
+    if (host.querySelector('.edu-card')) {
+      initEducationAnimations();
+      observer.disconnect();
+    }
+  });
+
+  observer.observe(host, { childList: true, subtree: true });
+
+  // In case content was already present
+  if (host.querySelector('.edu-card')) {
+    initEducationAnimations();
+    observer.disconnect();
+  }
+})();
 
 

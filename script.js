@@ -30,6 +30,8 @@ function loadSection(id, file) {
 loadSection("skills", "sections/skills.html");
 loadSection("experience", "sections/experience.html");
 loadSection("education", "sections/education.html");
+loadSection("project", "sections/project.html");
+loadSection("fiverr", "sections/fiverr.html");
 
 const navLinks = document.querySelectorAll('.nav-link');
 const navMenu = document.querySelector('.nav-menu');

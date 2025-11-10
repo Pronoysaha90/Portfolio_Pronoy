@@ -1205,15 +1205,19 @@ body.show-mobile-menu .menu-overlay {
 /* === Testimonials (glass + marquee) === */
 .testimonials {
   background: var(--dark-color);
-  padding: 4.5rem 0;
+  /* padding: 4.5rem 0; */
 }
 
-.testimonials .section-content { position: relative; }
-
-.tm-head { 
-  text-align: center; 
-  margin-bottom: 2rem; 
+.testimonials .section-content {
   position: relative;
+  /* overflow-x: hidden;           */
+}
+
+.tm-head {
+  position: relative;
+  text-align: center;
+  margin-bottom: 2rem;
+  padding-top: 20px;
 }
 
 .tm-kicker {
@@ -1256,11 +1260,16 @@ body.show-mobile-menu .menu-overlay {
   z-index: 0;
 }
 
-.tm-rows { position: relative; z-index: 1; display: grid; gap: 22px; }
+.tm-rows {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 22px;
+}
 
 /* marquee shells */
-.marquee { 
-  overflow: hidden; 
+.marquee {
+  overflow: hidden;
   mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
 }
 
@@ -1269,49 +1278,103 @@ body.show-mobile-menu .menu-overlay {
   gap: 18px;
   width: max-content;
   animation: tm-scroll 40s linear infinite;
+  will-change: transform;
 }
+
 .tm-row-bottom .marquee-track {
   animation-direction: reverse;
   animation-duration: 55s;
 }
 
-/* pause on hover */
+/* pause on hover (desktop) */
 .marquee:hover .marquee-track { animation-play-state: paused; }
 
 @keyframes tm-scroll {
   from { transform: translateX(0); }
-  to   { transform: translateX(-50%); } /* track duplicated by JS */
+  to   { transform: translateX(-50%); }  /* assumes track is duplicated in JS */
 }
 
 /* cards */
 .tm-card {
   min-width: 360px;
   max-width: 380px;
+  padding: 18px;
+  color: var(--white-color);
   background: rgba(28, 33, 58, 0.534);
   -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255,255,255,.2);
   border-radius: var(--border-radius-s);
   box-shadow: 0 4px 30px rgba(0,0,0,.2);
-  color: var(--white-color);
-  padding: 18px;
 }
 
-.tm-user { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+.tm-user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
 
 .tm-avatar {
-  width: 40px; height: 40px; border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  flex: none;
+  border-radius: 50%;
   background: linear-gradient(135deg, var(--third-color), var(--Light-Sky-Blue));
   box-shadow: 0 0 12px rgba(166,225,250,.25);
-  flex: none;
 }
 
 .tm-name { font-weight: var(--font-weight-semibold); color: var(--white-color); }
 .tm-handle { font-size: var(--font-size-s); color: #94a3b8; }
 
-.tm-text { color: #cbd5e1; font-size: var(--font-size-m); line-height: 1.5; }
+.tm-text {
+  color: #cbd5e1;
+  font-size: var(--font-size-m);
+  line-height: 1.5;
+}
 
+/* === Mobile refinements (≤700px) === */
 @media (max-width: 700px) {
-  .tm-card { min-width: 280px; }
-  .tm-title { font-size: var(--font-size-xl); }
+  .tm-head { margin-bottom: 1.4rem; }
+  .tm-title { font-size: var(--font-size-xl); line-height: 1.2; }
+  .tm-sub { font-size: var(--font-size-n); }
+
+  /* soften background glow so it doesn't overlap */
+  .tm-blur {
+    width: 320px;
+    height: 200px;
+    top: -10px;
+    filter: blur(70px);
+  }
+
+  /* tighter rows and smoother scroll on small screens */
+  .tm-rows { gap: 14px; }
+  .marquee {
+    padding-inline: 6px;
+    mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  }
+  .marquee-track { gap: 12px; animation-duration: 32s; }
+  .tm-row-bottom .marquee-track { animation-duration: 40s; }
+
+  /* card width + text wrapping */
+  .tm-card {
+    min-width: 280px;          /* was 360px, caused overflow on small phones */
+    max-width: 300px;
+    padding: 14px;
+  }
+  .tm-user { gap: 10px; margin-bottom: 8px; }
+  .tm-avatar { width: 36px; height: 36px; }
+  .tm-name { font-size: var(--font-size-m); }
+  .tm-handle { font-size: var(--font-size-s); }
+  .tm-text {
+    font-size: var(--font-size-n);
+    line-height: 1.45;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
 }

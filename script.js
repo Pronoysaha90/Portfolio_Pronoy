@@ -102,7 +102,9 @@ window.addEventListener("load", () => {
   loadSection("skills",     "sections/skills.html",     initSkillsSection);
   loadSection("experience", "sections/experience.html", initExperienceAnimation);
   loadSection("education",  "sections/education.html",  initEducationAnimations);
-  loadSection("testimonials",     "sections/testimonials.html");
+  loadSection("testimonials", "sections/testimonials.html");
+  loadSection("testimonials", "sections/testimonials.html", initTestimonialsSection);
+
   // Optional: footer placeholder <div id="footer"></div>
   loadSection("footer",     "sections/footer.html").catch(() => {});
 
@@ -122,4 +124,12 @@ window.addEventListener("load", () => {
 });
 
 
+
+function initTestimonialsSection(root) {
+  // Duplicate each track’s content once to create a seamless loop
+  const tracks = root.querySelectorAll(".marquee-track");
+  tracks.forEach((track) => {
+    track.innerHTML += track.innerHTML;
+  });
+}
 

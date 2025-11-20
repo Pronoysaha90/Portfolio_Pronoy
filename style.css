@@ -491,14 +491,17 @@ body.show-mobile-menu .menu-overlay {
 
 .card-header {
   display: flex;
-  align-items: center;
+  align-items: center;   
   gap: 15px;
-  margin-bottom: 25px;
+  padding-bottom: 10px;
 }
 
 .card-header .icon {
-  font-size: var(--font-size-xxl);
+  font-size: 24px;       
+  display: flex;
+  align-items: center;
 }
+
 
 .skills-card h3 {
   font-size: var(--font-size-l);
@@ -1467,3 +1470,4 @@ body.show-mobile-menu .menu-overlay {
 @media (prefers-reduced-motion: reduce) {
   .marquee-track { animation: none; }
 }
+
